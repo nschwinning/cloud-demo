@@ -1,0 +1,15 @@
+name: Shutdown VM
+
+on:
+  workflow_dispatch
+
+jobs:
+  power:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Power VM
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.HCLOUD_TOKEN }}" \
+            https://api.hetzner.cloud/v1/servers/${{ secrets.HCLOUD_SERVER_ID }}/actions/poweroff
