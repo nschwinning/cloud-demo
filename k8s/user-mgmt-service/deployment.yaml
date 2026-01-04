@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-mgmt-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-mgmt-service
+  template:
+    metadata:
+      labels:
+        app: user-mgmt-service
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/nschwinning/user-mgmt-service:PLACEHOLDER
+          ports:
+            - containerPort: 8080

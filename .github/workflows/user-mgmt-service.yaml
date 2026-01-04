@@ -45,3 +45,14 @@ jobs:
         run: |
           docker push ${IMAGE_NAME}:${IMAGE_TAG}
           docker push ${IMAGE_NAME}:latest
+
+      - name: Set kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+
+      - name: Deploy
+        run: |
+          kubectl set image deployment/user-mgmt-service \
+            app=$IMAGE_NAME:$IMAGE_TAG \
+            --record
