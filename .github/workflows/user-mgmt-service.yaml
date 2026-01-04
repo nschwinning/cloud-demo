@@ -1,0 +1,38 @@
+name: user-mgmt-service
+
+permissions:
+  contents: read
+  packages: write
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "service/user-mgmt-service/**"
+      - "k8s/user-mgmt-service/**"
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: service/user-mgmt-service
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Login to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build image
+        run: mvn -B spring-boot:build-image -DskipTests
+
+      - name: Push image
+        run: docker push ghcr.io/nschwinning/user-mgmt-service:latest
