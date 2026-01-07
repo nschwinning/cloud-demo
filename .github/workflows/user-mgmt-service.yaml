@@ -50,9 +50,12 @@ jobs:
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+      
+      - name: Deploy manifests
+        run: kubectl apply -f k8s/user-mgmt-service
 
-      - name: Deploy
+      - name: Update image
         run: |
           kubectl set image deployment/user-mgmt-service \
             app=$IMAGE_NAME:$IMAGE_TAG \
-            --record
+            -n user-mgmt

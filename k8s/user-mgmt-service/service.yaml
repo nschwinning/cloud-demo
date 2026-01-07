@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: user-mgmt-service
+  namespace: user-mgmt
 spec:
   selector:
     app: user-mgmt-service

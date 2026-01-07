@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-mgmt-service
+  namespace: user-mgmt
 spec:
   replicas: 1
   selector:
