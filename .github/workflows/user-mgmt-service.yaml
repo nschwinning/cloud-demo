@@ -51,12 +51,17 @@ jobs:
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+
+      - name: Create namespace
+        working-directory: k8s/user-mgmt-service
+        run: |
+          ls
+          kubectl apply -f ./namespace.yaml
       
       - name: Deploy manifests
+        working-directory: k8s/user-mgmt-service
         run: | 
-          kubectl apply -f ../../k8s/user-mgmt-service/namespace.yaml
-          kubectl apply -f ../../k8s/user-mgmt-service/deployment.yaml
-          kubectl apply -f ../../k8s/user-mgmt-service/service.yaml
+          kubectl apply -f ./*.yaml
 
       - name: Update image
         run: |
