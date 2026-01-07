@@ -10,7 +10,7 @@ on:
       paths:
         - "service/user-mgmt-service/**"
         - "k8s/user-mgmt-service/**"
-  - workflow_dispatch
+  - workflow_dispatch:
 
 jobs:
   build-deploy:
