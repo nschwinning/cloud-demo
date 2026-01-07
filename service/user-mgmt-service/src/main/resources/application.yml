@@ -3,6 +3,8 @@ spring:
     name: user-mgmt-service
 
 management:
+  server:
+    port: 8081
   endpoints:
     web:
       exposure:
