@@ -55,8 +55,7 @@ jobs:
       - name: Create namespace
         working-directory: k8s/user-mgmt-service
         run: |
-          ls
-          kubectl apply -f ./namespace.yaml
+          kubectl apply -f namespace.yaml
       
       - name: Deploy manifests
         working-directory: k8s/user-mgmt-service
