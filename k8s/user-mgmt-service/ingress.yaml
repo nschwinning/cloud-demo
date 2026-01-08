@@ -3,8 +3,8 @@ kind: Ingress
 metadata:
   name: user-mgmt-service
   namespace: user-mgmt
-  spec:
-    ingressClassName: traefik
+spec:
+  ingressClassName: traefik
 spec:
   rules:
     - host: user-mgmt.example.com
